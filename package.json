@@ -10,6 +10,6 @@
   "author": "Nir Adler",
   "license": "ISC",
   "dependencies": {
-    "policyer": "^0.0.29"
+    "policyer": "^0.0.30"
   }
 }
