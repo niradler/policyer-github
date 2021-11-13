@@ -10,6 +10,7 @@ checks:
       - path: env.GITHUB_REF_NAME
         condition: equal
         value: "master"
-      - path: env.GITHUB_ACTOR
-        condition: equal
-        value: "niradler"
+      - path: env.GITHUB_REF_NAME
+        condition: not
+        utility: isEmpty
+        value: true
