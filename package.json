@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node cli.js"
+    "start": "node cli.js",
+    "dev": "node cli.js -p checks"
   },
   "keywords": [],
   "author": "Nir Adler",

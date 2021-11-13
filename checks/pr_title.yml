@@ -8,5 +8,8 @@ checks:
     severity: High
     steps:
       - path: pull_request.title
+        condition: equal
+        value: true
         utility: regex
-        value: "/PR/"
+        utilityProps:
+          - "/PR/i"

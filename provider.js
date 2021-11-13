@@ -8,7 +8,10 @@ class GithubProvider extends Provider {
 
   async collect(configuration) {
     const events = JSON.parse(
-      fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8")
+      fs.readFileSync(
+        process.env.GITHUB_EVENT_PATH || "events/example.json",
+        "utf8"
+      )
     );
     const githubEnv = Object.keys(process.env).reduce((acc, key) => {
       if (key.startsWith("GITHUB_")) {
@@ -16,7 +19,7 @@ class GithubProvider extends Provider {
       }
       return acc;
     }, {});
-    events.env = githubEnv;
+    if (!events.env) events.env = githubEnv;
     console.log("events", events);
     return events;
   }
