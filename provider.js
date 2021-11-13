@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { Provider } = require("policyer");
 
 class GithubProvider extends Provider {
@@ -6,8 +7,16 @@ class GithubProvider extends Provider {
   }
 
   async collect(configuration) {
-    console.log(process.env);
-    return process.env;
+    const events = fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8");
+    console.log("events", events);
+    const githubEnv = process.env.reduce((acc, key) => {
+      if (key.startsWith("GITHUB_")) {
+        acc[key] = process.env[key];
+      }
+      return acc;
+    }, {});
+    console.log("githubEnv", githubEnv);
+    return githubEnv;
   }
 
   async evaluate({ configuration, checks }) {
