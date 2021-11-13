@@ -7,6 +7,6 @@ checks:
     name: check if branch start with PR.
     severity: High
     steps:
-      - path: GITHUB_REF
-        condition: includes
+      - path: GITHUB_REF_NAME
+        condition: equal
         value: "master"
