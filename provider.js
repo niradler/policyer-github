@@ -20,7 +20,7 @@ class GithubProvider extends Provider {
       return acc;
     }, {});
     if (!events.env) events.env = githubEnv;
-    console.log("events", events);
+    if (process.env.INPUT_VERBOSE === "true") console.log("events", events);
     return events;
   }
 
