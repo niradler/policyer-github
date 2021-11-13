@@ -1,0 +1,15 @@
+{
+  "name": "policyer-github",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node cli.js"
+  },
+  "keywords": [],
+  "author": "Nir Adler",
+  "license": "ISC",
+  "dependencies": {
+    "policyer": "^0.0.29"
+  }
+}

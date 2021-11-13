@@ -1,0 +1,12 @@
+---
+configuration:
+  provider: github-provider
+  type: github
+checks:
+  - id: should-start-with-pr
+    name: check if branch start with PR.
+    severity: High
+    steps:
+      - path: GITHUB_REF
+        condition: includes
+        value: "master"

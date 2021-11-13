@@ -1,0 +1,16 @@
+name: Policyer
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Policyer GitHub Action
+        uses: policyerorg/policyer-action@v0.0.2-alpha
+        with:
+          verbose: true
+          provider: local
+          internal: false
+          checks_path: ./checks
