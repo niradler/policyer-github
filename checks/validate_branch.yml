@@ -1,0 +1,15 @@
+---
+configuration:
+  provider: github-provider
+  type: github
+checks:
+  - id: validate-branch-name
+    name: check if pr title start with PR.
+    severity: High
+    steps:
+      - path: env.GITHUB_HEAD_REF
+        condition: equal
+        value: true
+        utility: regex
+        utilityProps:
+          - "/^FIX-/"
