@@ -13,7 +13,7 @@ configuration:
   type: github
 checks:
   - id: validate-branch-name
-    name: check if pr title start with PR.
+    name: check if branch start with Fix-.
     severity: High
     steps:
       - path: env.GITHUB_HEAD_REF
