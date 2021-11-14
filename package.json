@@ -1,10 +1,10 @@
 {
   "name": "policyer-github",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "bin": {
-    "policyer-github": "policyer-github"
+    "policyer-github": "cli.js"
   },
   "scripts": {
     "start": "node cli.js",
