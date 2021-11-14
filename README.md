@@ -2,7 +2,7 @@
 
 Github provider to test and validate github events.
 
-[by policyer](https://github.com/niradler/policyer)
+[visit policyer repository](https://github.com/niradler/policyer)
 
 ## Getting Started
 
