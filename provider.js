@@ -8,27 +8,33 @@ class GithubProvider extends Provider {
   }
 
   async collect(configuration) {
-    const authToken = core.getInput("github_token", { required: true });
-    const eventName = github.context.eventName;
-    core.info(`Event name: ${eventName}`);
-    const validEvents = configuration.validEvents;
-    if (validEvents.indexOf(eventName) < 0) {
-      core.setFailed(`Invalid event: ${eventName}`);
-      throw new core.Error(`Invalid event: ${eventName}`);
-    }
-    const args = Object.keys(configuration.args).reduce((acc, key) => {
-      acc[key] = getKey(github, configuration.args[key]);
-      return acc;
-    }, {});
-    console.log({ args });
-    const client = github.getOctokit(authToken);
-    const { data } = await client[configuration.type][configuration.domain][
-      configuration.action
-    ](args);
+    try {
+      const authToken = core.getInput("github_token", { required: true });
+      const eventName = github.context.eventName;
+      core.info(`Event name: ${eventName}`);
+      const validEvents = configuration.validEvents;
+      if (validEvents.indexOf(eventName) < 0) {
+        core.setFailed(`Invalid event: ${eventName}`);
+        throw new core.Error(`Invalid event: ${eventName}`);
+      }
+      const args = Object.keys(configuration.args).reduce((acc, key) => {
+        acc[key] = getKey(github, configuration.args[key]);
+        return acc;
+      }, {});
+      console.log({ args });
+      const client = github.getOctokit(authToken);
+      const { data } = await client[configuration.type][configuration.domain][
+        configuration.action
+      ](args);
 
-    if (process.env.INPUT_VERBOSE === "true")
-      console.log("data", JSON.stringify(data));
-    return data;
+      if (process.env.INPUT_VERBOSE === "true")
+        console.log("data", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      console.error(error);
+      core.setFailed(error.message);
+      throw error;
+    }
   }
 
   async evaluate({ configuration, checks }) {
