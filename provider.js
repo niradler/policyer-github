@@ -17,6 +17,7 @@ class GithubProvider extends Provider {
       throw new core.Error(`Invalid event: ${eventName}`);
     }
     const args = configuration.args;
+    console.log({ args });
     const client = github.getOctokit(authToken);
     const { data } = await client[configuration.type][configuration.domain][
       configuration.action
