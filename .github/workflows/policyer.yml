@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Policyer GitHub Action
-        uses: policyerorg/policyer-action@v0.0.2-alpha
+        uses: policyerorg/policyer-action@latest
         with:
           verbose: false
           provider: local
