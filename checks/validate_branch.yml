@@ -1,21 +1,14 @@
 ---
 configuration:
   provider: github-provider
-  type: rest
   validEvents:
     - pull_request
-  domain: pulls
-  action: get
-  args:
-    owner: context.payload.pull_request.base.user.login
-    repo: context.payload.pull_request.base.repo.name
-    pull_number: context.payload.pull_request.number
 checks:
   - id: validate-branch-name
     name: check if branch start with FIX-.
     severity: High
     steps:
-      - path: title
+      - path: env.GITHUB_HEAD_REF
         condition: equal
         value: true
         utility: regex
