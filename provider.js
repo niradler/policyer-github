@@ -1,4 +1,4 @@
-const fs = require("fs");
+const getKey = require("lodash.get");
 const { Provider } = require("policyer");
 const core = require("@actions/core");
 const github = require("@actions/github");
@@ -16,7 +16,10 @@ class GithubProvider extends Provider {
       core.setFailed(`Invalid event: ${eventName}`);
       throw new core.Error(`Invalid event: ${eventName}`);
     }
-    const args = configuration.args;
+    const args = Object.keys(configuration.args).reduce((acc, key) => {
+      acc[key] = getKey(github, configuration.args[key]);
+      return acc;
+    }, {});
     console.log({ args });
     const client = github.getOctokit(authToken);
     const { data } = await client[configuration.type][configuration.domain][
