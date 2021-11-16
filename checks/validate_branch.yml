@@ -9,7 +9,7 @@ configuration:
   args:
     owner: context.payload.pull_request.base.user.login
     repo: context.payload.pull_request.base.repo.name
-    pull_number: github.context.payload.pull_request.number
+    pull_number: context.payload.pull_request.number
 checks:
   - id: validate-branch-name
     name: check if branch start with FIX-.
