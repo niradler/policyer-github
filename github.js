@@ -23,6 +23,7 @@ async function run() {
 
     const owner = github.context.payload.pull_request.base.user.login;
     const repo = github.context.payload.pull_request.base.repo.name;
+    const pull_number = github.context.payload.pull_request.number;
 
     const client = github.getOctokit(authToken);
     // The pull request info on the context isn't up to date. When
@@ -32,13 +33,13 @@ async function run() {
     const { data: pullRequest } = await client.rest.pulls.get({
       owner,
       repo,
-      pull_number: github.context.payload.pull_request.number,
+      pull_number,
     });
     console.log({ pullRequest });
     const { data: files } = await client.rest.pulls.listFiles({
       owner,
       repo,
-      pull_number: github.context.payload.pull_request.number,
+      pull_number,
     });
     console.log({ files });
     const { data: reviewers } = client.rest.pulls.listRequestedReviewers({
