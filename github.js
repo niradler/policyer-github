@@ -35,68 +35,24 @@ async function run() {
       pull_number: github.context.payload.pull_request.number,
     });
     console.log({ pullRequest });
-    const title = pullRequest.title;
-
-    core.info(`Pull Request title: "${title}"`);
-
-    // Check if title pass regex
-    const regex = RegExp(core.getInput("regex"));
-    if (!regex.test(title)) {
-      core.setFailed(
-        `Pull Request title "${title}" failed to pass match regex - ${regex}`
-      );
-      return;
-    }
-
-    // Check min length
-    const minLen = parseInt(core.getInput("min_length"));
-    if (title.length < minLen) {
-      core.setFailed(
-        `Pull Request title "${title}" is smaller than min length specified - ${minLen}`
-      );
-      return;
-    }
-
-    // Check max length
-    const maxLen = parseInt(core.getInput("max_length"));
-    if (maxLen > 0 && title.length > maxLen) {
-      core.setFailed(
-        `Pull Request title "${title}" is greater than max length specified - ${maxLen}`
-      );
-      return;
-    }
-
-    // Check if title starts with an allowed prefix
-    let prefixes = core.getInput("allowed_prefixes");
-    const prefixCaseSensitive =
-      core.getInput("prefix_case_sensitive") === "true";
-    core.info(`Allowed Prefixes: ${prefixes}`);
-    if (
-      prefixes.length > 0 &&
-      !prefixes
-        .split(",")
-        .some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))
-    ) {
-      core.setFailed(
-        `Pull Request title "${title}" did not match any of the prefixes - ${prefixes}`
-      );
-      return;
-    }
-
-    // Check if title starts with a disallowed prefix
-    prefixes = core.getInput("disallowed_prefixes");
-    core.info(`Disallowed Prefixes: ${prefixes}`);
-    if (
-      prefixes.length > 0 &&
-      prefixes
-        .split(",")
-        .some((el) => validateTitlePrefix(title, el, prefixCaseSensitive))
-    ) {
-      core.setFailed(
-        `Pull Request title "${title}" matched with a disallowed prefix - ${prefixes}`
-      );
-      return;
-    }
+    const { data: files } = await client.rest.pulls.listFiles({
+      owner,
+      repo,
+      pull_number: github.context.payload.pull_request.number,
+    });
+    console.log({ files });
+    const { data: reviewers } = client.rest.pulls.listRequestedReviewers({
+      owner,
+      repo,
+      pull_number,
+    });
+    console.log({ reviewers });
+    const { data: reviews } = client.rest.pulls.listReviews({
+      owner,
+      repo,
+      pull_number,
+    });
+    console.log({ reviews });
   } catch (error) {
     console.error(error);
     core.setFailed(error.message);
