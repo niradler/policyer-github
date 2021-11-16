@@ -1,6 +1,6 @@
 # policyer-github
 
-Github provider to test and validate github events.
+Github provider to test and validate github sdk calls.
 
 [visit policyer repository](https://github.com/niradler/policyer)
 
