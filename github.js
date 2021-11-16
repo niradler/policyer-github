@@ -3,14 +3,6 @@ const github = require("@actions/github");
 
 const validEvent = ["pull_request"];
 
-function validateTitlePrefix(title, prefix, caseSensitive) {
-  if (!caseSensitive) {
-    prefix = prefix.toLowerCase();
-    title = title.toLowerCase();
-  }
-  return title.startsWith(prefix);
-}
-
 async function run() {
   try {
     const authToken = core.getInput("github_token", { required: true });

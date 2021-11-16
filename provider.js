@@ -1,33 +1,34 @@
 const fs = require("fs");
 const { Provider } = require("policyer");
-const github = require("./github");
+const core = require("@actions/core");
+const github = require("@actions/github");
 class GithubProvider extends Provider {
   constructor(name = "todo-provider") {
     super(name);
   }
 
   async collect(configuration) {
-    await github();
-    const events = JSON.parse(
-      fs.readFileSync(
-        process.env.GITHUB_EVENT_PATH || "events/example.json",
-        "utf8"
-      )
-    );
-    const githubEnv = Object.keys(process.env).reduce((acc, key) => {
-      if (key.startsWith("GITHUB_")) {
-        acc[key] = process.env[key];
-      }
-      return acc;
-    }, {});
-    if (!events.env) events.env = githubEnv;
+    const authToken = core.getInput("github_token", { required: true });
+    const eventName = github.context.eventName;
+    core.info(`Event name: ${eventName}`);
+    const validEvents = configuration.validEvents;
+    if (validEvents.indexOf(eventName) < 0) {
+      core.setFailed(`Invalid event: ${eventName}`);
+      throw new core.Error(`Invalid event: ${eventName}`);
+    }
+    const args = configuration.args;
+    const client = github.getOctokit(authToken);
+    const { data } = await client[configuration.type][configuration.domain][
+      configuration.action
+    ](args);
+
     if (process.env.INPUT_VERBOSE === "true")
-      console.log("events", JSON.stringify(events));
-    return events;
+      console.log("data", JSON.stringify(data));
+    return data;
   }
 
   async evaluate({ configuration, checks }) {
-    if (configuration.type == "github") {
+    if (configuration.provider == "github-provider") {
       const todo = await this.collect(configuration);
       const report = this.evaluateChecks(todo, checks);
 
