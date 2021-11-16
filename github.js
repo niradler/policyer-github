@@ -29,7 +29,7 @@ async function run() {
     // the user updates the title and re-runs the workflow, it would
     // be outdated. Therefore fetch the pull request via the REST API
     // to ensure we use the current title.
-    const { data: pullRequest } = await client.pulls.get({
+    const { data: pullRequest } = await client.rest.pulls.get({
       owner,
       repo,
       pull_number: github.context.payload.pull_request.number,
