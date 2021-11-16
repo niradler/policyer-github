@@ -2,6 +2,8 @@
 configuration:
   provider: github-provider
   type: rest
+  validEvents:
+    - pull_request
   domain: pulls
   action: get
   args:
@@ -13,7 +15,7 @@ checks:
     name: check if branch start with FIX-.
     severity: High
     steps:
-      - path: env.GITHUB_HEAD_REF
+      - path: title
         condition: equal
         value: true
         utility: regex
