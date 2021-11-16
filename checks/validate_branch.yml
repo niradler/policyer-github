@@ -20,4 +20,4 @@ checks:
         value: true
         utility: regex
         utilityProps:
-          - "/^FIX-/"
+          - "/^FIX-/i"
