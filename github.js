@@ -24,7 +24,7 @@ async function run() {
     const owner = github.context.payload.pull_request.base.user.login;
     const repo = github.context.payload.pull_request.base.repo.name;
 
-    const client = new github.GitHub(authToken);
+    const client = github.getOctokit(authToken);
     // The pull request info on the context isn't up to date. When
     // the user updates the title and re-runs the workflow, it would
     // be outdated. Therefore fetch the pull request via the REST API
