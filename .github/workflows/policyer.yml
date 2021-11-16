@@ -14,3 +14,4 @@ jobs:
           provider: local
           internal: false
           checks_path: ./checks
+          github_token: ${{ secrets.GITHUB_TOKEN }}
