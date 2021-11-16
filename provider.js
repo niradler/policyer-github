@@ -7,6 +7,7 @@ class GithubProvider extends Provider {
   }
 
   async collect(configuration) {
+    await github();
     const events = JSON.parse(
       fs.readFileSync(
         process.env.GITHUB_EVENT_PATH || "events/example.json",

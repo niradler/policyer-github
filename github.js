@@ -34,7 +34,7 @@ async function run() {
       repo,
       pull_number: github.context.payload.pull_request.number,
     });
-
+    console.log({ pullRequest });
     const title = pullRequest.title;
 
     core.info(`Pull Request title: "${title}"`);
@@ -98,8 +98,9 @@ async function run() {
       return;
     }
   } catch (error) {
+    console.error(error);
     core.setFailed(error.message);
   }
 }
 
-run();
+module.exports = run;
