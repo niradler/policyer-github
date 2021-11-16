@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { Provider } = require("policyer");
-
+const github = require("./github");
 class GithubProvider extends Provider {
   constructor(name = "todo-provider") {
     super(name);

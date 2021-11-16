@@ -10,7 +10,7 @@ jobs:
       - name: Policyer GitHub Action
         uses: policyerorg/policyer-action@v0.0.2-alpha
         with:
-          verbose: true
+          verbose: false
           provider: local
           internal: false
           checks_path: ./checks

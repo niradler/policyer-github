@@ -14,6 +14,8 @@
   "author": "Nir Adler",
   "license": "ISC",
   "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
     "policyer": "^0.0.30"
   }
 }
