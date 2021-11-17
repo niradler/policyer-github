@@ -72,7 +72,7 @@ jobs:
           checks_path: ./checks
 ```
 
-[Workflow](static/action.PNG)
+![Workflow](static/action.PNG)
 
 Links for github documentation:
 
