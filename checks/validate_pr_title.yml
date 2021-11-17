@@ -22,9 +22,9 @@ checks:
         utilityProps:
           - "/^FIX/i"
   - id: validate-files-changed
-    name: validate changed files is less then 4.
+    name: validate changed files is less then 8.
     severity: High
     steps:
       - path: data.changed_files
         condition: lte
-        value: 4
+        value: 8
