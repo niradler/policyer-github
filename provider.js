@@ -16,6 +16,7 @@ class GithubProvider extends Provider {
 
       core.info(`Event name: ${eventName}`);
       const validEvents = configuration.validEvents;
+      core.info(`Valid events: ${validEvents}`);
       if (validEvents.indexOf(eventName) < 0) {
         core.setFailed(`Invalid event: ${eventName}`);
         throw new Error(`Invalid event: ${eventName}`);
