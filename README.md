@@ -72,6 +72,8 @@ jobs:
           checks_path: ./checks
 ```
 
+[Workflow](static/action.PNG)
+
 Links for github documentation:
 
 - https://docs.github.com/en/rest/reference
