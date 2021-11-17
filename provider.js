@@ -18,7 +18,7 @@ class GithubProvider extends Provider {
       const validEvents = configuration.validEvents;
       if (validEvents.indexOf(eventName) < 0) {
         core.setFailed(`Invalid event: ${eventName}`);
-        throw new core.Error(`Invalid event: ${eventName}`);
+        return { skip: true };
       }
 
       if (configuration.type == "rest") {
@@ -55,7 +55,7 @@ class GithubProvider extends Provider {
         console.log("event", JSON.stringify(event));
       }
 
-      return { data, env, event };
+      return { data, env, event, skip: false };
     } catch (error) {
       console.error(error);
       core.setFailed(error.message);
@@ -66,9 +66,11 @@ class GithubProvider extends Provider {
   async evaluate({ configuration, checks }) {
     if (configuration.provider == "github-provider") {
       const data = await this.collect(configuration);
-      const report = this.evaluateChecks(data, checks);
+      if (data.skip === false) {
+        const report = this.evaluateChecks(data, checks);
 
-      return report;
+        return report;
+      }
     } else {
       throw new Error("Not a valid check.");
     }
