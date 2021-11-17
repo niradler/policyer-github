@@ -18,7 +18,7 @@ checks:
     steps:
       - path: data.users
         condition: includes
-        value: "nirtester2"
+        value: "nirtester"
         utility: map
         utilityProps:
           - "login"
