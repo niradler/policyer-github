@@ -16,9 +16,9 @@ checks:
     name: check if reviewers exists.
     severity: High
     steps:
-      - path: data.title
-        condition: equal
-        value: true
-        utility: regex
+      - path: data.users
+        condition: includes
+        value: "nirtester"
+        utility: map
         utilityProps:
-          - "/^FIX/i"
+          - "login"
