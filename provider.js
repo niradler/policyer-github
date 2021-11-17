@@ -3,6 +3,7 @@ const getKey = require("lodash.get");
 const { Provider } = require("policyer");
 const core = require("@actions/core");
 const github = require("@actions/github");
+
 class GithubProvider extends Provider {
   constructor(name = "todo-provider") {
     super(name);

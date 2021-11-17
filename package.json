@@ -1,7 +1,7 @@
 {
   "name": "policyer-github",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "Policyer provider to validate github sdk calls",
   "main": "index.js",
   "bin": {
     "policyer-github": "cli.js"
@@ -10,7 +10,11 @@
     "start": "node cli.js",
     "dev": "node cli.js -p checks"
   },
-  "keywords": [],
+  "keywords": [
+    "github",
+    "actions",
+    "policyer"
+  ],
   "author": "Nir Adler",
   "license": "ISC",
   "dependencies": {
