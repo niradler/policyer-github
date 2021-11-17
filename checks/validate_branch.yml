@@ -1,7 +1,8 @@
 ---
 configuration:
   provider: github-provider
-  type: github
+  validEvents:
+    - pull_request
 checks:
   - id: validate-branch-name
     name: check if branch start with FIX-.
@@ -12,4 +13,4 @@ checks:
         value: true
         utility: regex
         utilityProps:
-          - "/^FIX-/"
+          - "/^FIX/i"
