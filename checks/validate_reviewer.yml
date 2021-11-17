@@ -12,13 +12,13 @@ configuration:
     repo: context.payload.pull_request.base.repo.name
     pull_number: context.payload.pull_request.number
 checks:
-  - id: validate-pr-title
-    name: check if pr title start with FIX.
+  - id: validate-reviewers
+    name: check if reviewers exists.
     severity: High
     steps:
-      - path: data.title
-        condition: equal
-        value: true
-        utility: regex
+      - path: data.users
+        condition: includes
+        value: "nirtester"
+        utility: map
         utilityProps:
-          - "/^FIX/i"
+          - "login"

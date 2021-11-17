@@ -1,6 +1,6 @@
 name: Policyer
 
-on: [pull_request, push]
+on: [pull_request]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
       - name: Policyer GitHub Action
         uses: policyerorg/policyer-action@v0.0.3-alpha
         with:
-          verbose: true
+          verbose: false
           provider: local
           internal: false
           checks_path: ./checks
