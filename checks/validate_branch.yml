@@ -3,6 +3,7 @@ configuration:
   provider: github-provider
   validEvents:
     - pull_request
+    - push
 checks:
   - id: validate-branch-name
     name: check if branch start with FIX-.
